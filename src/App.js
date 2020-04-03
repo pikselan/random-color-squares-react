@@ -103,31 +103,44 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="container">
-            <label>
-              Pick your favorite color :
-              <select value={this.state.value} onChange={this.handleChangeSelect}>
-                <option selected="selected" value="all">All</option>
-                {options}
-              </select>
-            </label>
-            <br />
-            <label>
-              Dark color :
-              <input 
-                type="checkbox" 
-                name="saturation" 
-                checked={this.state.isChecked}
-                onChange={this.handleChangeCheck} 
-              />
-            </label>
-            <br />
+          <section>
+            <h1>Random Color Squares</h1>
+            <hr />
+          </section>
 
-            <button onClick={this.reset}>reset</button>
-        </div>
-        <div className="container">
-          <div className="d-flex flex-wrap">
-            {boxes}
-          </div>
+          <section>
+              <label className="widget">
+                Pick your favorite color :
+                <select className="form-control" value={this.state.value} onChange={this.handleChangeSelect}>
+                  <option value="all">All</option>
+                  {options}
+                </select>
+              </label>
+
+              <div className="form-check widget">
+                <input 
+                  type="checkbox" 
+                  name="saturation" 
+                  id="checkSat"
+                  className="form-check-input"
+                  checked={this.state.isChecked}
+                  onChange={this.handleChangeCheck} 
+                />
+                <label className="form-check-label" htmlFor="checkSat">
+                  Dark color
+                </label>
+              </div>
+
+              <button className="btn btn-primary widget" onClick={this.reset}>Reset</button>
+          </section>
+
+          <section>
+            <hr />
+            <div className="d-flex flex-wrap">
+              {boxes}
+            </div>
+          </section>
+
         </div>
       </div>
     );
