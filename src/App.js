@@ -58,18 +58,26 @@ class App extends React.Component {
       return color.isDark();
     }
 
-    this.setState({
-      isChecked: !this.state.isChecked,
-      boxes: this.state.allChange.filter((b) => {
-        let hex = convertCssColorNameToHex(b.color);
-        return getSaturation(hex) ? b.color : console.log('white');
-      })
-    });
+    if (!this.state.isChecked) {
+      this.setState({
+        isChecked: true,
+        boxes: this.state.allChange.filter((b) => {
+          let hex = convertCssColorNameToHex(b.color);
+          return getSaturation(hex) ? b.color : console.log('white');
+        })
+      });
+    } else {
+      this.setState({
+        isChecked: false,
+        boxes: this.state.all
+      });
+
+    }
   }
 
   reset = event => {
     this.setState({
-      isChecked: !this.state.isChecked,
+      isChecked: false,
       boxes: this.state.all
     })
   }
