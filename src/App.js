@@ -2,6 +2,7 @@ import React from 'react';
 import Box from './Box';
 import './App.css';
 import convertCssColorNameToHex from 'convert-css-color-name-to-hex';
+var Color = require('color');
 
 class App extends React.Component {
   constructor(props) {
@@ -48,22 +49,20 @@ class App extends React.Component {
     });
   }
 
+
+
   handleChangeCheck = event => {
+
+    function getSaturation(hex){
+      var color = Color(hex);
+      return color.isDark();
+    }
+
     this.setState({
       isChecked: !this.state.isChecked,
-      boxes: this.state.allChange.filter((e) => {
-        let hex = convertCssColorNameToHex(e.color);
-        if (hex.match(/^rgb/)) {
-          let hsp;
-          hex = hex.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
-          // red = hex[1];
-          // green = hex[2];
-          // blue = hex[3];
-          alert(hsp);
-          if (hsp <= 127.5) {
-            return e.color;
-          }
-        }
+      boxes: this.state.allChange.filter((b) => {
+        let hex = convertCssColorNameToHex(b.color);
+        return !getSaturation(hex) ? b.color : console.log('white');
       })
     });
   }
