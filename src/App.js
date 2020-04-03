@@ -18,6 +18,7 @@ class App extends React.Component {
 
     this.state = {
       boxes,
+      all: boxes,
       value: '',
       isChecked: false
     };
@@ -38,7 +39,10 @@ class App extends React.Component {
 
   handleChangeSelect = event => {
     this.setState({
-      value: event.target.value
+      value: event.target.value,
+      boxes: this.state.all.filter((b) => {
+        return b.color === event.target.value;
+      })
     });
 
     console.log(this.state.value);
