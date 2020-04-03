@@ -19,6 +19,7 @@ class App extends React.Component {
     this.state = {
       boxes,
       all: boxes,
+      allChange: boxes,
       value: '',
       isChecked: false
     };
@@ -40,7 +41,7 @@ class App extends React.Component {
   handleChangeSelect = event => {
     this.setState({
       value: event.target.value,
-      boxes: this.state.all.filter((b) => {
+      boxes: this.state.allChange.filter((b) => {
         return b.color === event.target.value;
       })
     });
@@ -53,6 +54,12 @@ class App extends React.Component {
       isChecked: !this.state.isChecked
     });
     console.log(this.state.isChecked);
+  }
+
+  reset = event => {
+    this.setState({
+      boxes: this.state.all
+    })
   }
 
   render() {
@@ -84,6 +91,9 @@ class App extends React.Component {
                 onChange={this.handleChangeCheck} 
               />
             </label>
+            <br />
+
+            <button onClick={this.reset}>reset</button>
         </div>
         <div className="container">
           <div className="d-flex flex-wrap">
