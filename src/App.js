@@ -41,12 +41,19 @@ class App extends React.Component {
   }
 
   handleChangeSelect = event => {
-    this.setState({
-      value: event.target.value,
-      boxes: this.state.allChange.filter((b) => {
-        return b.color === event.target.value;
-      })
-    });
+    if (event.target.value === 'all') {
+      this.setState({
+        value: event.target.value,
+        boxes: this.state.all
+      });
+    } else {
+      this.setState({
+        value: event.target.value,
+        boxes: this.state.allChange.filter((b) => {
+          return b.color === event.target.value;
+        })
+      });
+    }
   }
 
 
@@ -98,6 +105,7 @@ class App extends React.Component {
             <label>
               Pick your favorite color :
               <select value={this.state.value} onChange={this.handleChangeSelect}>
+                <option selected="selected" value="all">All</option>
                 {options}
               </select>
             </label>
