@@ -62,7 +62,7 @@ class App extends React.Component {
       isChecked: !this.state.isChecked,
       boxes: this.state.allChange.filter((b) => {
         let hex = convertCssColorNameToHex(b.color);
-        return !getSaturation(hex) ? b.color : console.log('white');
+        return getSaturation(hex) ? b.color : console.log('white');
       })
     });
   }
@@ -95,7 +95,7 @@ class App extends React.Component {
             </label>
             <br />
             <label>
-              Darker :
+              Only dark color :
               <input 
                 type="checkbox" 
                 name="saturation" 
