@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from './Box';
 import './App.css';
+import convertCssColorNameToHex from 'convert-css-color-name-to-hex';
 
 class App extends React.Component {
   constructor(props) {
@@ -45,19 +46,31 @@ class App extends React.Component {
         return b.color === event.target.value;
       })
     });
-
-    console.log(this.state.value);
   }
 
   handleChangeCheck = event => {
     this.setState({
-      isChecked: !this.state.isChecked
+      isChecked: !this.state.isChecked,
+      boxes: this.state.allChange.filter((e) => {
+        let hex = convertCssColorNameToHex(e.color);
+        if (hex.match(/^rgb/)) {
+          let hsp;
+          hex = hex.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+          // red = hex[1];
+          // green = hex[2];
+          // blue = hex[3];
+          alert(hsp);
+          if (hsp <= 127.5) {
+            return e.color;
+          }
+        }
+      })
     });
-    console.log(this.state.isChecked);
   }
 
   reset = event => {
     this.setState({
+      isChecked: !this.state.isChecked,
       boxes: this.state.all
     })
   }
