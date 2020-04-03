@@ -22,7 +22,7 @@ class App extends React.Component {
       boxes,
       all: boxes,
       allChange: boxes,
-      value: '',
+      value: 'all',
       isChecked: false
     };
     
@@ -84,6 +84,7 @@ class App extends React.Component {
 
   reset = event => {
     this.setState({
+      value: 'all',
       isChecked: false,
       boxes: this.state.all
     })
@@ -111,7 +112,7 @@ class App extends React.Component {
             </label>
             <br />
             <label>
-              Only dark color :
+              Dark color :
               <input 
                 type="checkbox" 
                 name="saturation" 
